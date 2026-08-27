@@ -1,0 +1,5 @@
+[package]
+name = "structured-derivations"
+version = "0.1.0"
+entrypoint = "lib.typ"
+description = "Structured theories and derivations for Typst."

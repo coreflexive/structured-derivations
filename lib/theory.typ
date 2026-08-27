@@ -1,0 +1,171 @@
+// ------------------------------------------------------------
+// Structured theory machinery
+// ------------------------------------------------------------
+//
+// STRUCTURAL INVARIANT
+// --------------------
+// A theory is a genuine two-column grid.
+//
+//   marker | body
+//          | continuation
+//          | continuation
+//
+// The marker occurs ONLY on the first row of a multi-line item.
+// Every continuation row contains an explicit blank cell in column 1.
+// The column boundary is part of the notation and must not be replaced
+// by wrapped or nested content in column 2.
+
+#import "style.typ": shared-rule-fill, shared-primary-fill, shared-secondary-fill, shared-marker-fill
+
+#let qed = [$square.filled.small$]
+#let normal(x) = math.class("normal", x)
+
+// Primitive: exactly one two-cell theory row.
+#let theory-row(mark, body) = (
+  [
+    #text(fill: shared-marker-fill)[#mark]
+  ],
+  [
+    #pad(y: 0.12em)[#body]
+  ],
+)
+
+// Build explicit blank-marker continuation rows.
+// `body` values are already Typst content (for mathematical lines,
+// normally `$...$`). Do not wrap them in another math environment.
+#let _continuation-rows(..bodies) = {
+  let rows = ()
+  for body in bodies.pos() {
+    rows += theory-row([], body)
+  }
+  rows
+}
+
+// Generic marked item. The first row has the marker; all later rows have
+// an explicit blank first cell and therefore remain in column 2.
+#let theory-line(mark, body, ..continuations) = {
+  let rows = theory-row(mark, body)
+  rows += _continuation-rows(..continuations)
+  rows
+}
+
+// Prose uses exactly the same row discipline. The separate name is semantic:
+// it says that the bodies are narrative content rather than formulae.
+#let theory-text-row(mark, body, ..continuations) = theory-line(
+  mark,
+  body,
+  ..continuations,
+)
+
+#let section(title) = theory-row(
+  [],
+  [
+    #text(
+      fill: shared-secondary-fill,
+      size: 0.9em,
+      weight: "semibold",
+    )[#title]
+  ],
+)
+
+#let empty-theory-row = theory-row([], [])
+
+// Semantic constructors.
+// Mathematical bodies are passed as already-formed content, e.g. `$R ⊆ S$`.
+#let declare(name, typ, ..continuations) = {
+  let rows = theory-row("+", [$#name in typ$])
+  rows += _continuation-rows(..continuations)
+  rows
+}
+
+#let imports(body, ..continuations) = theory-line(
+  $convolve$,
+  body,
+  ..continuations,
+)
+
+#let sub(lhs, rhs) = $lhs colon.eq rhs$
+#let subs(..items) = items.pos().join($, $)
+#let using(name, subst) = $#name [#subst]$
+
+#let import-theory(name, subst: none) = {
+  if subst == none {
+    imports(name)
+  } else {
+    imports(using(name, subst))
+  }
+}
+
+#let assume(label, body, ..continuations) = theory-line(
+  label,
+  body,
+  ..continuations,
+)
+
+#let observe(label, body, ..continuations) = theory-line(
+  label,
+  body,
+  ..continuations,
+)
+
+#let define(body, ..continuations) = theory-line(
+  "+",
+  body,
+  ..continuations,
+)
+
+// Narrative material inside a theory. It deliberately has no marker.
+#let remark(body, ..continuations) = theory-text-row(
+  [],
+  body,
+  ..continuations,
+)
+
+// Row constructors are supplied directly as variadic arguments.
+#let theory(
+  title,
+  width: auto,
+  min-width: 45%,
+  inset: 9pt,
+  stroke: shared-rule-fill,
+  ..rows,
+) = box(
+  stroke: stroke,
+  inset: inset,
+  width: width,
+)[
+  #grid(
+    columns: (2em, auto),
+    row-gutter: 0.75em,
+    align: left,
+
+    [#text(fill: shared-marker-fill)[§]],
+    [
+      #text(fill: shared-primary-fill, weight: "bold")[#title]
+      #box(width: min-width, height: 0pt)[]
+    ],
+
+    ..rows.pos().flatten(),
+
+    [#text(fill: shared-marker-fill)[#qed]],
+    []
+  )
+]
+
+#let centred-theory(
+  title,
+  width: auto,
+  min-width: 45%,
+  inset: 9pt,
+  stroke: shared-rule-fill,
+  ..rows,
+) = align(center)[
+  #theory(
+    title,
+    width: width,
+    min-width: min-width,
+    inset: inset,
+    stroke: stroke,
+    ..rows,
+  )
+]
