@@ -22,7 +22,7 @@
 #let relcomplement(R) = $overline(#R)$
 
 // Direct image notation R[X].
-#let relimage(R, X) = $R[#X]$
+#let relimage(R, X) = $#R[#X]$
 
 // Code-mode aliases.
 #let rel-type = reltype

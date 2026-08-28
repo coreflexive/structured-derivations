@@ -134,10 +134,17 @@
   inset: 9pt,
   stroke: shared-rule-fill,
   ..rows,
-) = box(
+) = block(
+  // A block, unlike a box, can continue across page boundaries.
+  // Keep width:auto so the framed theory remains content-sized rather than
+  // expanding to the full text width. Explicit zero spacing preserves the
+  // document rhythm of the former box-based implementation.
+  breakable: true,
   stroke: stroke,
   inset: inset,
   width: width,
+  above: 0pt,
+  below: 0pt,
 )[
   #grid(
     // The marker track grows to the widest marker actually used.
