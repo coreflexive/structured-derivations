@@ -125,8 +125,10 @@
   ..continuations,
 )
 
-#let define(body, ..continuations) = theory-line(
-  "+",
+// Definitions use `+` by default, but may carry an explicit reference label.
+// `label` is named so existing calls such as `define($x := y$)` remain valid.
+#let define(body, label: "+", ..continuations) = theory-line(
+  label,
   body,
   ..continuations,
 )
