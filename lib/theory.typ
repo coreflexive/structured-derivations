@@ -135,9 +135,8 @@
   width: width,
 )[
   #grid(
-    // Keep both columns content-sized. In particular, the marker column
-    // grows to the widest marker used by this theory (e.g. `A2.6.`),
-    // while continuation rows still retain an explicit blank first cell.
+    // The marker track grows to the widest marker actually used.
+    // The body track remains independently content-sized.
     columns: (auto, auto),
     column-gutter: 0.6em,
     row-gutter: 0.75em,
@@ -145,9 +144,19 @@
 
     [#text(fill: shared-marker-fill)[§]],
     [
-      #box(width: min-width)[
-          #text(fill: shared-primary-fill, weight: "bold")[#title]
-      ]
+      // The vertical stack makes the cell as wide as the larger of:
+      //   * the title itself, and
+      //   * the invisible minimum-width strut.
+      //
+      // This gives the body column a genuine minimum without adding the
+      // title width to that minimum and without constraining the title
+      // to the minimum width.
+      #stack(
+        dir: ttb,
+        spacing: 0pt,
+        [#text(fill: shared-primary-fill, weight: "bold")[#title]],
+        box(width: min-width, height: 0pt)[],
+      )
     ],
 
     ..rows.pos().flatten(),
