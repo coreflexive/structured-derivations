@@ -145,8 +145,9 @@
 
     [#text(fill: shared-marker-fill)[§]],
     [
-      #text(fill: shared-primary-fill, weight: "bold")[#title]
-      #box(width: min-width, height: 0pt)[]
+      #box(width: min-width)[
+          #text(fill: shared-primary-fill, weight: "bold")[#title]
+      ]
     ],
 
     ..rows.pos().flatten(),
