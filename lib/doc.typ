@@ -2,7 +2,7 @@
 // Surrounding document helpers
 // ------------------------------------------------------------
 
-#import "style.typ": shared-primary-fill, shared-secondary-fill
+#import "style.typ": shared-primary-fill, shared-secondary-fill, shared-rule-fill
 
 #let doc-title(body) = align(center)[
   #pad(bottom: 1em)[
@@ -35,3 +35,14 @@
 ]
 
 #let artefact-gap = v(1.2em)
+
+// Quiet punctuation between unboxed structured artefacts.
+#let separator(
+  gap: 0.8em,
+  length: 100%,
+  stroke: 0.4pt + shared-rule-fill,
+) = {
+  v(gap)
+  line(length: length, stroke: stroke)
+  v(gap)
+}

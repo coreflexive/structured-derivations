@@ -52,4 +52,4 @@
   calc-finish
 )
 
-#boxed(obs-01)
+#centred-boxed(obs-01)

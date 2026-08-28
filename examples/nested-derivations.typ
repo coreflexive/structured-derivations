@@ -15,7 +15,7 @@ This example isolates the nesting mechanism used by structured derivations.
 
 #artefact(
   [Outer derivation with an open subtask],
-  boxed[
+  centred-boxed[
     #calc(
       calc-row(
         start,
@@ -60,7 +60,7 @@ This example isolates the nesting mechanism used by structured derivations.
 
 #artefact(
   [The same subtask expanded],
-  boxed[
+  centred-boxed[
     #calc(
       calc-row(
         start,

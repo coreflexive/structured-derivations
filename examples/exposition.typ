@@ -132,7 +132,7 @@ place for reference.
 The calculation below demonstrates the second half of the library.
 
 `artefact` gives a derivation a captioned home in the surrounding document.
-`boxed` adds the visual frame, while `calc` lays out the derivation itself as a
+`centred-boxed` adds a centred visual frame, while `calc` lays out the derivation itself as a
 sequence of rows.
 
 A calculation normally begins with `calc-row(start, ...)`, proceeds through
@@ -156,7 +156,7 @@ arise without flattening the proof structure.
 
 #artefact(
   [Example derivation],
-  boxed[
+  centred-boxed[
     #calc(
       calc-row(
         start,

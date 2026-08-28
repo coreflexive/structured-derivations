@@ -2,10 +2,8 @@
 
 #set text(size: 15pt)
 
-#theory(
+#unboxed-theory(
   "Arithmetic in a commutative ring",
-  stroke: none,
-  inset: 0pt,
 
   section("Imports"),
 

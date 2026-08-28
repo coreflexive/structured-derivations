@@ -40,6 +40,7 @@
 #let mute(body) = colour(shared-muted-fill, body)
 
 // Row-producing constructors return arrays of grid cells.
+// `calc` itself has no frame and no centring: it is the naked calculation.
 #let calc(
   column-gutter: 1em,
   row-gutter: 1em,
@@ -91,23 +92,53 @@
   )
 }
 
+// A frame with no imposed horizontal alignment.
+// This is the boxed + uncentred presentation.
+#let uncentred-boxed(
+  body,
+  width: auto,
+  inset: 1em,
+  stroke: 0.6pt,
+  radius: 3pt,
+) = box(
+  width: width,
+  inset: inset,
+  stroke: stroke,
+  radius: radius,
+)[
+  #align(left)[
+    #body
+  ]
+]
+
+// The explicitly centred framed presentation.
+#let centred-boxed(
+  body,
+  width: auto,
+  inset: 1em,
+  stroke: 0.6pt,
+  radius: 3pt,
+) = align(center)[
+  #uncentred-boxed(
+    body,
+    width: width,
+    inset: inset,
+    stroke: stroke,
+    radius: radius,
+  )
+]
+
+// Backwards-compatible name: historically `boxed` also centred its body.
 #let boxed(
   body,
   width: auto,
   inset: 1em,
   stroke: 0.6pt,
   radius: 3pt,
-) = {
-  align(center)[
-    #box(
-      width: width,
-      inset: inset,
-      stroke: stroke,
-      radius: radius,
-    )[
-      #align(left)[
-        #body
-      ]
-    ]
-  ]
-}
+) = centred-boxed(
+  body,
+  width: width,
+  inset: inset,
+  stroke: stroke,
+  radius: radius,
+)

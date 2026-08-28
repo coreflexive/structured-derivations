@@ -166,6 +166,21 @@
   )
 ]
 
+// Explicit naked presentation: no frame and no centring.
+#let unboxed-theory(
+  title,
+  width: auto,
+  min-width: 45%,
+  ..rows,
+) = theory(
+  title,
+  width: width,
+  min-width: min-width,
+  inset: 0pt,
+  stroke: none,
+  ..rows,
+)
+
 #let centred-theory(
   title,
   width: auto,
