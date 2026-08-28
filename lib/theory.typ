@@ -75,6 +75,18 @@
 
 #let empty-theory-row = theory-row([], [])
 
+// Quiet punctuation within a theory. This is a genuine two-cell theory row:
+// the marker cell remains blank and the rule occupies only the body column.
+// Keeping it inside the normal row structure preserves pagination and the
+// semantic marker/body boundary.
+#let theory-separator(
+  length: 100%,
+  stroke: 0.4pt + shared-rule-fill,
+) = theory-row(
+  [],
+  [#line(length: length, stroke: stroke)],
+)
+
 // Semantic constructors.
 // Mathematical bodies are passed as already-formed content, e.g. `$R ⊆ S$`.
 #let declare(name, typ, ..continuations) = {
