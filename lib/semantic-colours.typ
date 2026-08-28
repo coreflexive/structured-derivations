@@ -24,8 +24,8 @@
   assume(
     "A1.",
     $a + b = c$,
-    focus($a = c - b$),
-    tentative($b = c - a$),
+    accent($a = c - b$),
+    contrast($b = c - a$),
   ),
 
   section("Observations"),
@@ -33,8 +33,6 @@
   observe(
     "T1.",
     $a + b = b + a$,
-    confirmed($(-a) (-b) = a b$),
-    meta([$T1$ is available as a named law.]),
     mute([This continuation is deliberately de-emphasised.]),
   ),
 )
@@ -48,13 +46,13 @@
 
   step(
     $=$,
-    [Commutativity],
-    focus($b + a$),
+    hint([Commutativity]),
+    accent($b + a$),
   ),
 
   step(
     $=$,
-    [Undischarged side-condition],
+    hint([Undischarged side-condition]),
     warn($c$),
   ),
 

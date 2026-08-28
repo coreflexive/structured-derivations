@@ -15,37 +15,37 @@
 
   step(
     $equiv$,
-    [Extensionality],
+    hint([Extensionality]),
     $(forall a | : a in X equiv a in R[X])$,
   ),
 
   step(
     $arrow.double$,
-    [Predicate calculus],
+    hint([Predicate calculus]),
     $(forall a | a in R[X] : a in X)$
   ),
 
   step(
     $equiv$,
-    [Direct image],
+    hint([Direct image]),
     $(forall a | (exists x | x in X : a "R" x) : a in X)$
   ),
 
   step(
     $equiv$,
-    [Splitting],
+    hint([Splitting]),
     $(forall x | x in X : (forall a | a "R" x : a in X))$
   ),
 
   step(
     $equiv$,
-    [Nesting],
+    hint([Nesting]),
     $(forall a,x | x in X and a "R" x : a in X)$
   ),
 
   step(
     $equiv$,
-    [Definition of Left closed],
+    hint([Definition of Left closed]),
     $"Left closed" R space X$
   ),
 

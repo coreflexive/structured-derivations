@@ -12,10 +12,17 @@
 #let shared-hint-fill = rgb("#2f80a8")
 #let shared-warn-fill = rgb("#b84a62")
 
-// Semantic annotation colours.  Public helpers live in calc.typ; keeping
-// the palette here means the meaning-names need not change if the colours do.
-#let shared-focus-fill = rgb("#2f6fa8")
+// Explicit annotation colours. The everyday names are rhetorical rather
+// than strongly epistemic: accent, contrast, mute, warn.
+#let shared-accent-fill = rgb("#2f6fa8")
+#let shared-contrast-fill = rgb("#765b9e")
+#let shared-muted-fill = rgb("#737b84")
+
+// Specialised semantic colours retained for cases where those distinctions
+// genuinely earn their keep.
 #let shared-tentative-fill = rgb("#a66a2c")
 #let shared-confirmed-fill = rgb("#3f7f5f")
-#let shared-meta-fill = rgb("#765b9e")
-#let shared-muted-fill = rgb("#737b84")
+
+// Backwards-compatible palette aliases.
+#let shared-focus-fill = shared-accent-fill
+#let shared-meta-fill = shared-contrast-fill

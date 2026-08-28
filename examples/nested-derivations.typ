@@ -1,4 +1,5 @@
 #import "../lib/calc.typ": *
+#import "../lib/annotations.typ": *
 #import "../lib/doc.typ": *
 
 #set page(
@@ -24,13 +25,13 @@ This example isolates the nesting mechanism used by structured derivations.
 
       step(
         $equiv$,
-        [Outer law],
+        hint([Outer law]),
         $E_1$,
       ),
 
       step(
         $equiv$,
-        [Law producing a proof obligation],
+        hint([Law producing a proof obligation]),
         calc(
           calc-row(
             start,
@@ -46,7 +47,7 @@ This example isolates the nesting mechanism used by structured derivations.
 
       step(
         $equiv$,
-        [Outer law],
+        hint([Outer law]),
         $E_3$,
       ),
 
@@ -69,13 +70,13 @@ This example isolates the nesting mechanism used by structured derivations.
 
       step(
         $equiv$,
-        [Outer law],
+        hint([Outer law]),
         $E_1$,
       ),
 
       step(
         $equiv$,
-        [Law producing a proof obligation],
+        hint([Law producing a proof obligation]),
         calc(
           calc-row(
             start,
@@ -84,13 +85,13 @@ This example isolates the nesting mechanism used by structured derivations.
 
           step(
             $equiv$,
-            [Nested law],
+            hint([Nested law]),
             $Q$,
           ),
 
           step(
             $equiv$,
-            [Nested law],
+            hint([Nested law]),
             $R$,
           ),
 
@@ -108,7 +109,7 @@ This example isolates the nesting mechanism used by structured derivations.
 
       step(
         $equiv$,
-        [Outer law],
+        hint([Outer law]),
         $E_3$,
       ),
 

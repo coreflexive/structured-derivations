@@ -1,5 +1,6 @@
 #import "../lib/theory.typ": *
 #import "../lib/calc.typ": *
+#import "../lib/annotations.typ": *
 #import "../lib/doc.typ": *
 
 #set page(
@@ -138,6 +139,8 @@ sequence of rows.
 A calculation normally begins with `calc-row(start, ...)`, proceeds through
 `step(...)` entries, and ends with `calc-row(finish, [])`.  Each `step` has
 three parts: the relation marker, the justification, and the resulting body.
+Justifications are rendered exactly as supplied; this example wraps them in
+`hint(...)` explicitly when the quiet blue reason style is wanted.
 
 The `lines` helper is used where one calculation body should contain several
 aligned display lines while still occupying a single body position in the
@@ -165,19 +168,19 @@ arise without flattening the proof structure.
 
       step(
         $equiv$,
-        [Extensionality],
+        hint([Extensionality]),
         $(forall a | : a in X equiv a in R[X])$,
       ),
 
       step(
         $equiv$,
-        [Mutual implication],
+        hint([Mutual implication]),
         $(forall a | : (a in X arrow.double a in R[X]) and (a in X arrow.double.l a in R[X]))$,
       ),
 
       step(
         $equiv$,
-        [Distributivity; Trading],
+        hint([Distributivity; Trading]),
         lines(
           $(forall a | a in X : a in R[X]) and$,
           $(forall a | a in R[X] : a in X)$,
@@ -186,7 +189,7 @@ arise without flattening the proof structure.
 
       step(
         $equiv$,
-        [Definition of direct image, twice],
+        hint([Definition of direct image, twice]),
         lines(
           $(forall a | a in X : (exists x | x in X : a "R" x)) and$,
           $(forall a | (exists x | x in X : a "R" x) : a in X)$,
@@ -195,7 +198,7 @@ arise without flattening the proof structure.
 
       step(
         $equiv$,
-        [Identity of conjunction],
+        hint([Identity of conjunction]),
         calc(
           calc-row(
             start,
@@ -211,13 +214,13 @@ arise without flattening the proof structure.
 
       step(
         $equiv$,
-        [Splitting],
+        hint([Splitting]),
         $(forall x | x in X : (forall a | a "R" x : a in X))$,
       ),
 
       step(
         $equiv$,
-        [Definition of Left Set],
+        hint([Definition of Left Set]),
         $"Left Set" R space X$,
       ),
 

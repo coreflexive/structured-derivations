@@ -1,43 +1,23 @@
 // ------------------------------------------------------------
 // Calculation machinery
 // ------------------------------------------------------------
+//
+// STRUCTURAL COLOUR INVARIANT
+// ---------------------------
+// The first grid column is calculation notation: start/end markers,
+// relation signs, gap markers, and blank continuation cells. Content in
+// that marker column receives the shared structural marker colour.
+//
+// The body column is never coloured merely because of its position.
+// Reasons and mathematical bodies are rendered exactly as supplied; use
+// explicit helpers such as `hint(...)`, `accent(...)`, etc. when colour
+// is wanted there.
 
-#import "style.typ": shared-hint-fill, shared-warn-fill
-#import "style.typ": shared-focus-fill, shared-tentative-fill, shared-confirmed-fill
-#import "style.typ": shared-meta-fill, shared-muted-fill
+#import "style.typ": shared-marker-fill
 
 #let start = $diamond.small.filled$
 #let finish = $square.small.filled$
 #let gap = $dots$
-
-#let colour(fill, body) = {
-  if fill == none {
-    body
-  } else {
-    text(fill: fill, body)
-  }
-}
-
-#let hint(body) = text(
-  fill: shared-hint-fill,
-  size: 0.95em,
-  body,
-)
-
-#let warn(body) = text(
-  fill: shared-warn-fill,
-  size: 0.95em,
-  body,
-)
-
-// Semantic colour annotations.  These are intentionally presentation-only:
-// they may wrap any individual piece of content accepted by a theory or
-// calculation constructor.
-#let focus(body) = colour(shared-focus-fill, body)
-#let tentative(body) = colour(shared-tentative-fill, body)
-#let confirmed(body) = colour(shared-confirmed-fill, body)
-#let meta(body) = colour(shared-meta-fill, body)
-#let mute(body) = colour(shared-muted-fill, body)
 
 // Row-producing constructors return arrays of grid cells.
 // `calc` itself has no frame and no centring: it is the naked calculation.
@@ -55,8 +35,10 @@
   )
 }
 
+#let calc-marker(body) = text(fill: shared-marker-fill, body)
+
 #let calc-row(marker, body) = (
-  marker,
+  calc-marker(marker),
   body,
 )
 
@@ -73,11 +55,13 @@
 // A calculation step occupies two grid rows:
 // relation | reason
 //          | body
+//
+// IMPORTANT: `reason` is rendered exactly as supplied. In particular, it is
+// not coloured merely because it is the second argument. Write `hint(reason)`
+// explicitly when the quiet blue reason style is wanted.
 #let step(relation, reason, body) = (
-  relation,
-  hint(reason),
-  [],
-  body,
+  ..calc-row(relation, reason),
+  ..calc-row([], body),
 )
 
 #let lines(

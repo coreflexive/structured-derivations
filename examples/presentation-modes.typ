@@ -20,7 +20,7 @@
   calc-start($rho inter sigma$),
   step(
     $equiv$,
-    [Commutativity],
+    hint([Commutativity]),
     $sigma inter rho$,
   ),
   calc-finish,
