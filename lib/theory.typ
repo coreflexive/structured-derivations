@@ -135,7 +135,11 @@
   width: width,
 )[
   #grid(
-    columns: (2em, auto),
+    // Keep both columns content-sized. In particular, the marker column
+    // grows to the widest marker used by this theory (e.g. `A2.6.`),
+    // while continuation rows still retain an explicit blank first cell.
+    columns: (auto, auto),
+    column-gutter: 0.6em,
     row-gutter: 0.75em,
     align: left,
 
