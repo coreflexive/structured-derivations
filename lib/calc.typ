@@ -3,6 +3,8 @@
 // ------------------------------------------------------------
 
 #import "style.typ": shared-hint-fill, shared-warn-fill
+#import "style.typ": shared-focus-fill, shared-tentative-fill, shared-confirmed-fill
+#import "style.typ": shared-meta-fill, shared-muted-fill
 
 #let start = $diamond.small.filled$
 #let finish = $square.small.filled$
@@ -27,6 +29,15 @@
   size: 0.95em,
   body,
 )
+
+// Semantic colour annotations.  These are intentionally presentation-only:
+// they may wrap any individual piece of content accepted by a theory or
+// calculation constructor.
+#let focus(body) = colour(shared-focus-fill, body)
+#let tentative(body) = colour(shared-tentative-fill, body)
+#let confirmed(body) = colour(shared-confirmed-fill, body)
+#let meta(body) = colour(shared-meta-fill, body)
+#let mute(body) = colour(shared-muted-fill, body)
 
 // Row-producing constructors return arrays of grid cells.
 #let calc(
