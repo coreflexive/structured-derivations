@@ -23,7 +23,12 @@
 // Primitive: exactly one two-cell theory row.
 #let theory-row(mark, body) = (
   [
-    #text(fill: shared-marker-fill)[#mark]
+    // Keep marker and body on the same vertical footing. The grid aligns
+    // cells by their boxes, so asymmetric padding makes markers such as
+    // `1.` appear slightly high beside mathematical content.
+    #pad(y: 0.12em)[
+      #text(fill: shared-marker-fill)[#mark]
+    ]
   ],
   [
     #pad(y: 0.12em)[#body]
